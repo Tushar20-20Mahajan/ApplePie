@@ -23,11 +23,31 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        newRound()
     }
 
+    var currentGame: Game!
+    func newRound() {
+      let newWord = listOfWords.removeFirst()
+        currentGame = Game(word: newWord, incorrectMovesRemaning: incorrectMovesAllowed , guessedLetters: [])
+        updateUI()
+    }
+    
+    func updateUI() {
+        scoreWordLable.text = "Wins: \(totalWins), Losses: \(totalLosses)"
+        treeImageView.image = UIImage(named: "Tree \(currentGame.incorrectMovesRemaning)")
+        
+    }
+   
     @IBAction func letterButtonPressed(_ sender: UIButton) {
         
         sender.isEnabled = false
+        let letterString = sender.configuration!.title!
+        let letter = Character(letterString.lowercased())
+        currentGame.playerGuessed(letter: letter)
+        updateUI()
+        
+       
     }
     
 }
