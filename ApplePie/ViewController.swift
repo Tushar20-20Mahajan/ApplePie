@@ -83,17 +83,28 @@ class ViewController: UIViewController {
       }
     }
     
+//    @IBAction func letterButtonPressed(_ sender: UIButton) {
+//        
+//        sender.isEnabled = false
+//        let letterString = sender.title(for: .normal)!
+//        
+//            let letter = Character(letterString.lowercased())
+//            currentGame.playerGuessed(letter: letter)
+//            updateGameState()
+//       
+//       
+//    }
     @IBAction func letterButtonPressed(_ sender: UIButton) {
-        
         sender.isEnabled = false
-        let letterString = sender.title(for: .normal)!
+        guard let letterString = sender.title(for: .normal) else {
+            return // If the title is nil, exit the function
+        }
         
-            let letter = Character(letterString.lowercased())
-            currentGame.playerGuessed(letter: letter)
-            updateGameState()
-       
-       
+        
+        let letter = Character(letterString.lowercased())
+        currentGame.playerGuessed(letter: letter)
+        updateGameState()
     }
-    
+
 }
 
